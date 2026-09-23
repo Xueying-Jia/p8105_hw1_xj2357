@@ -102,4 +102,24 @@ proportion of sampled values greater than zero.
 The character and factor variables return NA with warnings because
 these variables are not numeric or logical.
 
-argument is not numeric or logical: returning NA
+## Numeric conversion
+
+```{r numeric_conversion, echo = TRUE, results = "hide", warning = FALSE}
+as.numeric(pull(example_df, is_positive))
+as.numeric(pull(example_df, text_value))
+as.numeric(pull(example_df, category))
+```
+
+Converting the logical variable to numeric produces 1 for TRUE and 0 for FALSE. 
+This explains why its mean is the proportion of positive sampled values.
+
+Converting the character variable produces missing values and a warning,
+because the letters cannot be interpreted as numbers.
+
+Converting the factor produces its underlying numeric codes:
+1 for A, 2 for B, and 3 for C, according to the specified level order.
+These codes identify categories rather than measured quantities.
+Although their mean can be computed after conversion, 
+it is not a meaningful average of the categories. 
+The original factor cannot be passed directly to mean() to obtain 
+a valid numeric mean.
