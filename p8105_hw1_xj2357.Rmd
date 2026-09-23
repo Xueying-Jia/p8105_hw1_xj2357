@@ -64,3 +64,42 @@ ggsave(
 
 # Problem 2
 
+## Create the data frame
+
+The data frame below contains a standard normal sample, an indicator
+of whether each sampled value is positive, a character vector,
+and a factor with three levels.
+
+```{r create_example_df}
+set.seed(1)
+
+example_df = tibble(
+  normal_sample = rnorm(10),
+  is_positive = normal_sample > 0,
+  text_value = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+  category = factor(
+    c("A", "B", "C", "A", "B", "C", "A", "B", "C", "A"),
+    levels = c("A", "B", "C")
+  )
+)
+
+example_df
+```
+
+## Means of different variable types
+
+```{r variable_means}
+mean(pull(example_df, normal_sample))
+mean(pull(example_df, is_positive))
+mean(pull(example_df, text_value))
+mean(pull(example_df, category))
+```
+
+The numeric and logical variables have valid means. For the logical
+variable, TRUE is treated as 1 and FALSE as 0, so its mean is the
+proportion of sampled values greater than zero.
+
+The character and factor variables return NA with warnings because
+these variables are not numeric or logical.
+
+argument is not numeric or logical: returning NA
