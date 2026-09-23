@@ -14,5 +14,19 @@ library(tidyverse)
 data("penguins", package = "palmerpenguins")
 head(penguins)
 ```
+The dataset has `r nrow(penguins)` observations.
+
+The `penguins` dataset contains body measurements for penguins from
+the Palmer Archipelago, Antarctica. It has `r nrow(penguins)`
+observations and `r ncol(penguins)` variables.
+
+The species are Adelie, Chinstrap, and Gentoo, and the islands are 
+Biscoe, Dream, and Torgersen. Measurements include bill length,
+bill depth, and flipper length in millimeters, and body mass in grams.
+The dataset also records sex and year.
+
+The mean flipper length is
+`r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), digits = 2)`
+mm, excluding missing values.
 
 # Problem 2
