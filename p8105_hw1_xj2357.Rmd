@@ -12,9 +12,7 @@ library(tidyverse)
 
 ```{r load_penguins}
 data("penguins", package = "palmerpenguins")
-head(penguins)
 ```
-The dataset has `r nrow(penguins)` observations.
 
 The `penguins` dataset contains body measurements for penguins from
 the Palmer Archipelago, Antarctica. It has `r nrow(penguins)`
@@ -29,4 +27,40 @@ The mean flipper length is
 `r round(mean(pull(penguins, flipper_length_mm), na.rm = TRUE), digits = 2)`
 mm, excluding missing values.
 
+## Scatterplot
+
+```{r penguin_scatterplot, fig.width = 6, fig.height = 4}
+penguin_plot = ggplot(
+  penguins,
+  aes(
+    x = bill_length_mm,
+    y = flipper_length_mm,
+    color = species
+  )
+) +
+  geom_point(na.rm = TRUE) +
+  labs(
+    x = "Bill length (mm)",
+    y = "Flipper length (mm)",
+    color = "Species"
+  )
+
+penguin_plot
+```
+
+Observations with missing bill length or flipper length are omitted
+from this plot.
+
+```{r save_penguin_plot}
+ggsave(
+  filename = "penguin_scatterplot.png",
+  plot = penguin_plot,
+  width = 6,
+  height = 4,
+  units = "in",
+  dpi = 300
+)
+```
+
 # Problem 2
+
